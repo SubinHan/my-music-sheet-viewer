@@ -24,9 +24,11 @@ namespace MyPdfViewer
             
             foreach(FileInfo file in dir.GetFiles())
             {
+                PictureBox filePicture = new PictureBox();
                 Icon icon = Icon.ExtractAssociatedIcon(file.FullName);
+                filePicture.Image = icon.ToBitmap();
 
-                pictureBox1.Image = icon.ToBitmap();
+                flowLayoutPanel1.Controls.Add(filePicture);
             }
 
             string[] directories = Directory.GetDirectories(path);
