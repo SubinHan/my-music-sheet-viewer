@@ -28,6 +28,7 @@ namespace MyPdfViewer
 
         private void UpdateExplorer(string path)
         {
+            Debug.Print("UpdateExplorer: " + path);
             flowLayoutPanel1.Controls.Clear();
 
             string[] files = Directory.GetFiles(path);
@@ -35,37 +36,43 @@ namespace MyPdfViewer
 
             foreach (DirectoryInfo dir in root.GetDirectories())
             {
-                PictureBox dirPicture = new PictureBox();
-                Icon icon = DefaultIcons.GetStockIcon(DefaultIcons.SHSIID_FOLDER, DefaultIcons.SHGSI_SMALLICON);
-                dirPicture.Image = icon.ToBitmap();
-                dirPicture.Name = dir.FullName;
-                dirPicture.Click += OpenDir;
+                Debug.Print("DirectoryInfo: " + dir.Name);
 
-                flowLayoutPanel1.Controls.Add(dirPicture);
+                Icon icon = DefaultIcons.GetStockIcon(DefaultIcons.SHSIID_FOLDER, DefaultIcons.SHGSI_SMALLICON);
+
+                ExplorerItem item = new ExplorerItem();
+                item.Icon = icon;
+                item.ItemName = dir.Name;
+                item.Path = dir.FullName;
+                item.Click += OpenDir;
+
+                flowLayoutPanel1.Controls.Add(item);
             }
 
             foreach (FileInfo file in root.GetFiles())
             {
-                Debug.Print(file.Extension);
+                Debug.Print("FileInfo: " + file.Name);
 
                 if (!file.Extension.ToLower().Equals(".pdf"))
                     continue;
 
-                PictureBox filePicture = new PictureBox();
                 Icon icon = Icon.ExtractAssociatedIcon(file.FullName);
-                filePicture.Image = icon.ToBitmap();
-                filePicture.Name = file.FullName;
-                filePicture.Click += OpenPdf;
 
-                flowLayoutPanel1.Controls.Add(filePicture);
+                ExplorerItem item = new ExplorerItem();
+                item.Icon = icon;
+                item.ItemName = file.Name;
+                item.Path = file.FullName;
+
+                flowLayoutPanel1.Controls.Add(item);
             }
 
         }
 
         private void OpenDir(object sender, EventArgs e)
         {
-            PictureBox dir = sender as PictureBox;
-            UpdateExplorer(dir.Name);
+            Debug.Print("Button Clicked");
+            ExplorerItem item = sender as ExplorerItem;
+            UpdateExplorer(item.Path);
         }
 
         private void OpenPdf(object sender, EventArgs e)

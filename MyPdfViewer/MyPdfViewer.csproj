@@ -53,6 +53,12 @@
     <Compile Include="Explorer.Designer.cs">
       <DependentUpon>Explorer.cs</DependentUpon>
     </Compile>
+    <Compile Include="ExplorerItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ExplorerItem.Designer.cs">
+      <DependentUpon>ExplorerItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -63,6 +69,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Explorer.resx">
       <DependentUpon>Explorer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExplorerItem.resx">
+      <DependentUpon>ExplorerItem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
